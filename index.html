@@ -9,13 +9,35 @@
     </head>
     <body>
         <script type="text/javascript">
-        var dataset = [ 5, 10, 15, 20, 25 ];
+
+//Width and height
+            var w = 500;
+            var h = 50;
             
-            d3.select("body").selectAll("div")
+            //Data
+            var dataset = [ 5, 10, 15, 20, 25 ];
+            
+            //Create SVG element
+            var svg = d3.select("body")
+                        .append("svg")
+                        .attr("width", 500)
+                        .attr("height", 50);
+            var circles = svg.selectAll("circle")
                 .data(dataset)
                 .enter()
-                .append("div")
-                .attr('class', 'bar');
+                .append("circle");
+            circles.attr("cx", function(d, i) {
+                        return (i * 50) + 25;
+                    })
+                   .attr("cy", h/2)
+                   .attr("r", function(d) {
+                        return d;
+                   })
+                   .attr('fill', 'pink')
+                   .attr('stroke', 'purple')
+                   .attr('stroke-width', function(d){
+                    return d/3;
+                   });      
             
         </script>
     </body>
